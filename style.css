@@ -1,0 +1,89 @@
+body {
+background-color: rgb(236, 232, 217);
+}
+
+#app {
+    text-align: center;
+}
+
+#app_wrapper {
+    margin: 0 auto;
+}
+
+#question_block {
+    display: none;
+}
+
+#game_panel {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.player_column {
+    display: inline-block;
+    text-align: center;
+    margin-left: 20px;
+}
+
+.player_score {
+    width: 10px;
+    height: 0px;
+    transition: 1s;
+    margin: 0 auto;;
+}
+
+.person_column .player_score {
+    background-color: green;
+}
+
+.ai_column .player_score {
+    background-color: red;
+}
+
+.person_column {
+    color: green;
+}
+
+.ai_column {
+    color: red;
+}
+
+#playground {
+    margin-top: 25px;
+}
+
+#game_panel {
+    display: none;
+}
+
+#run {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#nextStep{
+    display: block;
+    margin: 15px auto 0;
+}
+
+.btn {
+    padding: 10px;
+    font-size: 18px;
+    color: #fff;
+    border-radius: 5px;
+    color: #fff;
+}
+
+.btn {
+    background-color: red;
+    transition: 0.5s;
+}
+
+.btn:hover {
+    background-color: green;
+    transition: 0.5s;
+}
