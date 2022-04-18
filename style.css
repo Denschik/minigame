@@ -15,7 +15,7 @@ body {
 
 #question_block {
     display: none;
-    flex: 0.8;
+    flex: 0.7;
 }
 
 #question_block, #result_message {
@@ -63,7 +63,7 @@ body {
 #playground {
     overflow-y: auto;
     max-height: 450px;
-    flex: 0.1;
+    flex: 0.05;
 }
 
 .char {
