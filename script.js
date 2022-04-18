@@ -89,8 +89,8 @@ function getRandomAnswer(){
 }
 
 function checkQuestion(inputAnswer){
-    if(current_question_element.answers.find(answer => inputAnswer.toLowerCase() === answer.toLowerCase())){
-        return inputAnswer;
+    if(current_question_element.answers.find(answer => inputAnswer.toLowerCase().trim() === answer.toLowerCase())){
+        return inputAnswer.trim();
     }
 
     return '';

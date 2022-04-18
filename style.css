@@ -1,5 +1,5 @@
 body {
-    background-color: rgb(236, 232, 217);
+    background-color: #ece8d9;
 }
 
 #app {
@@ -13,9 +13,20 @@ body {
     min-height: 100vh;
 }
 
+#top_separator {
+    flex: 0.8;
+}
+
 #question_block {
     display: none;
-    flex: 0.7;
+    position: fixed;
+    /* left: 50%; */
+    top: 50%;
+    transform: translate(0%, -50%);
+    padding: 10px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    background-color: rgb(236, 232, 217, 0.7);
 }
 
 #question_block, #result_message {
