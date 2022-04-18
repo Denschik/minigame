@@ -18,6 +18,12 @@ body {
     flex: 0.8;
 }
 
+#question_block, #result_message {
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
 #result_dashboard {
     display: flex;
     justify-content: space-between;
