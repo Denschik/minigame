@@ -33,7 +33,8 @@ function renderPlayersScore(){
         playground.innerHTML+= `<div class="player_column ` + player.type + `_column">
                                     <div id="player_` + i + `" class="player_status"></div>
                                     <div class="player_score"></div>
-                                    <div class="player_name">` + player.name + `</div>
+                                    <div class="player_name">` + player.name +`</div>
+                                    <div class="player_board"></div>
                                 </div>`;
 
     }
@@ -126,8 +127,8 @@ function updateScoreBar(){
         const element = $($('.player_column .player_score')[i]);
         const diff = player.score - element.children('.char').length;
 
+        $($('.player_column .player_board')[i])[0].innerHTML = '(' + (player.score - player.lastWord.length) + ' + ' + player.lastWord.length + ')';
         if(diff){
-
             for (let j = player.lastWord.length-1; j >= 0; j--) {
                 const char =  player.lastWord[j];
                 $(element).prepend('<div class="char">' + char + '</div>');
