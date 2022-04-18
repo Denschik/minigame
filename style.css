@@ -1,5 +1,5 @@
 body {
-background-color: rgb(236, 232, 217);
+    background-color: rgb(236, 232, 217);
 }
 
 #app {
@@ -7,18 +7,21 @@ background-color: rgb(236, 232, 217);
 }
 
 #app_wrapper {
-    margin: 0 auto;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 #question_block {
     display: none;
+    flex: 0.8;
 }
 
-#game_panel {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%) translateY(-50%);
+#result_dashboard {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
 }
 
 .player_column {
@@ -28,18 +31,19 @@ background-color: rgb(236, 232, 217);
 }
 
 .player_score {
-    width: 10px;
-    height: 0px;
     transition: 1s;
-    margin: 0 auto;;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .person_column .player_score {
-    background-color: green;
+    color: green;
 }
 
 .ai_column .player_score {
-    background-color: red;
+    color: red;
 }
 
 .person_column {
@@ -51,11 +55,45 @@ background-color: rgb(236, 232, 217);
 }
 
 #playground {
-    margin-top: 25px;
+    overflow-y: auto;
+    max-height: 450px;
+    flex: 0.1;
+}
+
+.char {
+    width: 20px;
+    height: 20px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+}
+
+.player_result {
+    color: #fff;
+    padding: 10px 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+.player_result.player_result_person {
+    background-color: green;
+}
+
+.player_result.player_result_ai {
+    background-color: red;
+}
+
+.word_spacer {
+    outline: 1px solid #000;
+    width: 20px;
 }
 
 #game_panel {
     display: none;
+}
+
+#word_input {
+    font-size: 18px;
+    border-radius: 5px;
 }
 
 #run {
@@ -63,9 +101,15 @@ background-color: rgb(236, 232, 217);
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+    cursor: pointer;
 }
 
-#nextStep{
+#run:hover {
+    font-size: 125%;
+    transition: 0.3s;
+}
+
+#next_step {
     display: block;
     margin: 15px auto 0;
 }

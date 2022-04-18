@@ -13,17 +13,21 @@
 <body>
   <div id="app">
     <div id="app_wrapper">
-      <div id="result_block"></div>
+      <div id="result_block">
+        <div id="result_message"></div>
+        <div id="result_dashboard"></div>
+      </div>
       <div id="question_block">
         <span>Вопрос:</span>
         <span id="question"></span>
       </div>
-      <div id="playground"></div>
-      <button class="btn" id='run' onclick="run()">Играть!</button>
-      <div id="game_panel">
-          <input type="text" id="wordInput">
-          <button class="btn" id='nextStep' onclick="nextStep()">Ответить</button>
-      </div>
+        <div id="playground"></div>
+        <button class="btn" id='run' onclick="run()">Играть!</button>
+        <div id="game_panel">
+            <input type="text" id="word_input" placeholder="Введите свой ответ">
+            <button class="btn" id='next_step' onclick="nextStep(); playClick()">Ответить</button>
+        </div>
+
     </div>
   </div>
 </body>

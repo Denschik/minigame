@@ -5,6 +5,7 @@ const typePerson = 'person'
 const typeAI = 'ai'
 const maxQuestions = 5;
 let passedQuestions = 0;
+const audioClick = new Audio('click.wav');
 
 function run(){
     passedQuestions = 0; //set start value for passed questions
@@ -20,6 +21,7 @@ function startGameElements(){
     document.getElementById('result_block').style.display = 'none';
     document.getElementById('question_block').style.display = 'block';
     document.getElementById('game_panel').style.display = 'block';
+    document.getElementById('playground').style.display = 'block';
 }
 
 function renderPlayersScore(){
@@ -38,32 +40,32 @@ function renderPlayersScore(){
 }
 
 function initPlayers(){
-    players.splice(0,players.length);
+    players.splice(0,players.length); //clean prev list players
     players.push({
         type: typePerson,
         score: 0,
-        position: 10,
+        lastWord: '',
         name: 'Игрок'
     });
 
     players.push({
         type: typeAI,
         score: 0,
-        position: 10,
+        lastWord: '',
         name: 'Анна'
     });
 
     players.push({
         type: typeAI,
         score: 0,
-        position: 10,
+        lastWord: '',
         name: 'Боб'
     });
 
     players.push({
         type: typeAI,
         score: 0,
-        position: 10,
+        lastWord: '',
         name: 'Влад'
     });
 }
@@ -88,28 +90,30 @@ function getRandomAnswer(){
 
 function checkQuestion(inputAnswer){
     if(current_question_element.answers.find(answer => inputAnswer.toLowerCase() === answer.toLowerCase())){
-        return inputAnswer.length;
+        return inputAnswer;
     }
 
-    return 0;
+    return '';
 }
 
-function addPointsToPerson(points){
-    addPoints(0, points);
+function addPointsToPerson(word){
+    players[0].lastWord =  word;
+    addPoints(0,word);
 }
 
 function addPointsToAI(){
     for (let i = 0; i < players.length; i++) {
         if(players[i].type === typeAI){
             const answer = getRandomAnswer();
-            addPoints(i, answer.length);
+            players[i].lastWord =  answer;
+            addPoints(i, answer);
         }
     }
 }
 
-function addPoints(indexPlayer, points){
-    if(points > 0 && typeof(players[indexPlayer]) !== 'undefined'){
-        players[indexPlayer].score += points;
+function addPoints(indexPlayer, word){
+    if(word && typeof(players[indexPlayer]) !== 'undefined'){
+        players[indexPlayer].score += word.length;
     }
 }
 
@@ -119,8 +123,17 @@ function updateScoreBar(){
 
     for (let i = 0; i < players.length; i++) {
         const player = players[i];
+        const element = $($('.player_column .player_score')[i]);
+        const diff = player.score - element.children('.char').length;
 
-        $($('.player_column .player_score')[i]).css({'height': (player.score * 2) + 'px'})
+        if(diff){
+
+            for (let j = player.lastWord.length-1; j >= 0; j--) {
+                const char =  player.lastWord[j];
+                $(element).prepend('<div class="char">' + char + '</div>');
+            }
+            $(element).prepend('<div class="word_spacer"></div>');
+        }
 
         if(player.score > max){
             max = player.score;
@@ -134,10 +147,9 @@ function updateScoreBar(){
 }
 
 function nextStep(){
-    const answer = document.getElementById('wordInput');
+    const answer = document.getElementById('word_input');
     const answerResult = checkQuestion(answer.value);
-
-    addPoints(0, answerResult); //add points to player
+    addPointsToPerson(answerResult);
     addPointsToAI();
     updateScoreBar();
     answer.value = ''; //clear input after answer
@@ -162,23 +174,38 @@ function finishGame(){
         }
     }
 
-
     if(players[leaderIndex].type === typePerson){
         audio = new Audio('win.wav');
-        document.getElementById('result_block').innerHTML = 'Поздравляем с победой!';
+        document.getElementById('result_message').innerHTML = 'Поздравляем с победой!';
     } else {
-        document.getElementById('result_block').innerHTML = 'К сожалению, вы не набрали максимум очков :(';
+        document.getElementById('result_message').innerHTML = 'К сожалению, вы не набрали максимум очков :(';
     }
 
+    audio.volume = 0.5;
     audio.play();
     endGameElements();
 }
 
+function showResultGame(){
+    document.getElementById('result_dashboard').innerHTML = '';
+
+    for(let i = 0; i < players.length; i++) {
+        const player = players[i];
+        $('#result_dashboard').append('<div class="player_result player_result_' + player.type + '">' + player.name + ' - ' + player.score + '</div>');
+    }
+}
+
 function endGameElements(){
+    showResultGame();
     document.getElementById('run').style.display = 'inline-block';
     document.getElementById('result_block').style.display = 'inline-block';
     document.getElementById('question_block').style.display = 'none';
     document.getElementById('game_panel').style.display = 'none';
+    document.getElementById('playground').style.display = 'none';
+}
+
+function playClick(){
+    audioClick.play();
 }
 
 function getRandom(min, max) {
