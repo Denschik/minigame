@@ -62,7 +62,7 @@ body {
 
 #playground {
     overflow-y: auto;
-    max-height: 450px;
+    max-height: 500px;
     flex: 0.05;
 }
 

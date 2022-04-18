@@ -182,7 +182,7 @@ function finishGame(){
     }
 
     audio.volume = 0.5;
-    audio.play();
+    // audio.play();
     endGameElements();
 }
 
